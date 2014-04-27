@@ -15,6 +15,7 @@ gem 'pg'
 gem 'rolify'
 gem 'simple_form'
 gem 'opentok'
+gem 'rake', '~>10.3.1'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
