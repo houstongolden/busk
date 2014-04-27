@@ -1,0 +1,54 @@
+<h1>Rooms#index</h1>
+<p>Find me in app/views/rooms/index.html.erb</p>
+
+<div id="myPublisherDiv"></div>
+
+
+<div id="newRoom">
+<fieldset>
+<legend>Start a new party room</legend>
+<%= form_for(@new_room) do |f| %>
+Party Name: <%= f.text_field :name %><br/><br/>
+Public? <%= f.check_box :public %><br/><br/>
+
+<%= f.submit %>
+<% end %>
+</fieldset>
+</div>
+
+<fieldset>
+<legend>Existing party rooms</legend>
+<table cellpadding=”2″ cellspacing=”5″>
+<tr>
+<th>Name</th>
+<th>Started</th>
+</tr>
+
+<% @rooms.each do |room| %>
+<tr>
+<td align=”center” width=”300px”><a href=”/party/<%= room.id %>”><%= room.name %></a></td>
+<td><%= room.created_at %></td>
+</tr>
+<% end %>
+</table>
+</fieldset>
+
+
+        <script type="text/javascript">
+          // Initialize API key, session, and token...
+          // Think of a session as a room, and a token as the key to get in to the room
+          // Sessions and tokens are generated on your server and passed down to the client
+          var apiKey = "44744392";
+          var sessionId = "2_MX40NDc0NDM5Mn5-U2F0IEFwciAyNiAyMDowMDowMyBQRFQgMjAxNH4wLjI0Mzc1MTR-fg";
+          var token = "T1==cGFydG5lcl9pZD00NDc0NDM5MiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz0zZGRjOTg5MDY4YmVlMGY0MjRiMGI5Y2E0NmViZDM2MjEzYWRkNWYwOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9Ml9NWDQwTkRjME5ETTVNbjUtVTJGMElFRndjaUF5TmlBeU1Eb3dNRG93TXlCUVJGUWdNakF4Tkg0d0xqSTBNemMxTVRSLWZnJmNyZWF0ZV90aW1lPTEzOTg1Njc2MDMmbm9uY2U9MC4yNTM1NzIwMzQ2NDA0MjgmZXhwaXJlX3RpbWU9MTM5ODY1NDAwMyZjb25uZWN0aW9uX2RhdGE9";
+
+          // Initialize session, set up event listeners, and connect
+          var session = TB.initSession(sessionId);
+          session.addEventListener('sessionConnected', sessionConnectedHandler);
+          session.connect(apiKey, token);
+          
+          function sessionConnectedHandler(event) {
+            var publisher = TB.initPublisher(apiKey, 'myPublisherDiv');
+            session.publish(publisher);
+          }
+        </script>
